@@ -17,7 +17,7 @@ import Categories from './components/Categories'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
-import Products from './components/Products'
+import Series from './components/Series'
 import Filmes from './components/Filmes'
 import Desenhos from './components/Desenho'
 
@@ -34,7 +34,7 @@ const App = () => {
         textoBotao = "Ver agora"
       />
       <Categories/>
-      <Products 
+      <Series 
         setCart={setCart}
         serie1={serie1}
         serie2={serie2}
