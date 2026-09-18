@@ -23,11 +23,9 @@ import Desenhos from './components/Desenho'
 
 const App = () => {
 
-  const [cart, setCart] = useState(0)
-
   return (
     <div className="app">
-      <Header adicionarCarrinho={cart} />
+      <Header />
       <HeroSection 
         titulo ="Breaking Bad"
         subtitulo= "Walter White é um professor de química na casa dos 50 anos que trabalha em uma escola secundária no Novo México. Para atender às necessidades de Skyler, sua esposa grávida, e Walt Junior, seu filho deficiente físico, ele tem que trabalhar duplamente. Sua vida fica ainda mais complicada quando descobre que está sofrendo de um câncer de pulmão incurável. Para aumentar rapidamente a quantidade de dinheiro que deixaria para sua família após sua morte, Walter usa seu conhecimento de química para fazer e vender metanfetamina, uma droga sintética. Ele conta com a ajuda do ex-aluno e pequeno traficante Jesse e enfrenta vários desafios, incluindo o fato de seu concunhado ser um importante nome dentro da Agência Anti-Drogas da região."

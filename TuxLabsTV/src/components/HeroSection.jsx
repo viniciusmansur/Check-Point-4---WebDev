@@ -1,4 +1,5 @@
 const HeroSection = ({ titulo, subtitulo, textoBotao, imagemHero }) => {
+  
   return (
     <section className="banner">
         <div className="banner-text">

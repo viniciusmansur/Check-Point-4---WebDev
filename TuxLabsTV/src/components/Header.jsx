@@ -1,8 +1,7 @@
 
 import { Link } from "react-router"
 
-const Header = ({adicionarCarrinho}) => {
-
+const Header = () => {
 
     return (
         <header className="header">
