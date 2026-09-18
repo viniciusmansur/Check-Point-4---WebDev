@@ -14,12 +14,12 @@ import desenho2 from './assets/b10.png'
 import desenho3 from './assets/su.png'
 import desenho4 from './assets/aus.png'
 import Categories from './components/Categories'
+import Desenhos from './components/Desenho'
+import Filmes from './components/Filmes'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import Series from './components/Series'
-import Filmes from './components/Filmes'
-import Desenhos from './components/Desenho'
 
 const App = () => {
 
@@ -33,12 +33,11 @@ const App = () => {
       />
       <Categories/>
       <Series 
-        setCart={setCart}
         serie1={serie1}
         serie2={serie2}
         serie3={serie3}
         serie4={serie4}
-         
+
       />
       <Filmes 
         filme1={filme1}

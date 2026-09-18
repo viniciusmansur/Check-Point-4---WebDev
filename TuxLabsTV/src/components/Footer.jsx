@@ -9,9 +9,9 @@ const Footer = () => {
         <div className="footer-column">
             <h3>Links úteis</h3>
             <ul>
-                <li><a href="/produtos">Listas</a></li>
+                <li><a href="/listas">Listas</a></li>
                 <li><a href="/contato">Contato</a></li>
-                <li><a href="#produtos">Sobre nós</a></li>
+                <li><a href="#lista">Sobre nós</a></li>
             </ul>
         </div>
 

@@ -34,7 +34,7 @@ O roteamento é configurado em src/main.jsx utilizando createBrowserRouter.
 
 Rota         Componente     Função            
 /            App           Página inicial    
-/produtos    ProductsPage  Página de listas  
+/listas    ProductsPage  Página de listas  
 /contato     ContatoPage   Página de contato 
 Erro         PageNotFound  Página 404        
 
