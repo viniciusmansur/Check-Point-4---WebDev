@@ -6,7 +6,6 @@ const Series = () => {
 
   useEffect(() => {
     const randomPage = Math.floor(Math.random() * 10) + 1;
-    // Usando o endpoint /discover/tv para buscar séries
     const url = `https://api.themoviedb.org/3/discover/tv?language=pt-BR&page=${randomPage}&vote_average.gte=6&vote_count.gte=100`;
     
     const options = {
@@ -68,7 +67,6 @@ const Series = () => {
               src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`} 
               alt={serie.name} 
             />
-            {/* Para séries na API do TMDB, usamos 'name' em vez de 'title' */}
             <h3>{serie.name}</h3>
             
             <p className="serie-sinopse">

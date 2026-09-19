@@ -6,7 +6,6 @@ const Desenhos = () => {
 
   useEffect(() => {
     const randomPage = Math.floor(Math.random() * 10) + 1;
-    // O parâmetro with_genres=16 garante que a API retorne apenas Animações
     const url = `https://api.themoviedb.org/3/discover/movie?with_genres=16&language=pt-BR&page=${randomPage}&vote_average.gte=6&vote_count.gte=100`;
     
     const options = {

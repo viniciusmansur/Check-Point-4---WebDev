@@ -20,7 +20,7 @@ const Footer = () => {
             <ul>
                 <li className="membro">Eduardo de Abreu Gouvêa - RM573414</li>
                 <li className="membro">Paulo Henrique Moreira Angueira - RM573245</li>
-                    <li className="membro">Vinícius Mansur Magalhães - RM571518</li>
+                <li className="membro">Vinícius Mansur Magalhães - RM571518</li>
             </ul>
         </div>
 
