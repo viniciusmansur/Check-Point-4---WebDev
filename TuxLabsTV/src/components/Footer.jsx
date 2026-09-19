@@ -18,9 +18,9 @@ const Footer = () => {
         <div className="footer-column">
             <h3>Membros do projeto</h3>
             <ul>
-                <li className="membro">Eduardo de Abreu Gouvêa</li>
-                <li className="membro">Paulo Henrique Moreira Angueira</li>
-                    <li className="membro">Vinícius Mansur Magalhães</li>
+                <li className="membro">Eduardo de Abreu Gouvêa - RM573414</li>
+                <li className="membro">Paulo Henrique Moreira Angueira - RM573245</li>
+                    <li className="membro">Vinícius Mansur Magalhães - RM571518</li>
             </ul>
         </div>
 

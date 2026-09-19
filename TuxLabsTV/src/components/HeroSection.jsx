@@ -1,13 +1,22 @@
-const HeroSection = ({ titulo, subtitulo, textoBotao, imagemHero }) => {
-  
+import { GiPlayButton } from "react-icons/gi";
+
+const HeroSection = ({ titulo, subtitulo, textoBotao }) => {
   return (
     <section className="banner">
-        <div className="banner-text">
-          <h1>{titulo}</h1>
-          <p>{subtitulo}</p>
-          <button className="btn-primary">{textoBotao}</button>
-        </div>
-      </section>
+      <div className="banner-text">
+
+        <span className="banner-tag">Série em destaque</span>
+
+        <h1>{titulo}</h1>
+
+        <p>{subtitulo}</p>
+
+        <button className="btn-primary">
+          <GiPlayButton /> {textoBotao}
+        </button>
+
+      </div>
+    </section>
   )
 }
 

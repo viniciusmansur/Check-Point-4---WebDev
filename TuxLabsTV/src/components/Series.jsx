@@ -1,40 +1,92 @@
-const Series = ({ serie1, serie2, serie3, serie4 }) => {
+import { useState, useEffect } from 'react';
+import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa";
 
-    return (
-        <section id="series" className="series">
-            <h2>Séries em destaque</h2>
+const Series = () => {
+  const [series, setSeries] = useState([]);
 
-            <div className="serie-list">
-                <div className="serie-card">
-                    <img src={serie1} alt="TBBT"/>
-                    <h3>The Big Bang Theory</h3>
-                    <p className="serie-rating">⭐⭐⭐⭐☆ (8.1)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+  useEffect(() => {
+    const randomPage = Math.floor(Math.random() * 10) + 1;
+    // Usando o endpoint /discover/tv para buscar séries
+    const url = `https://api.themoviedb.org/3/discover/tv?language=pt-BR&page=${randomPage}&vote_average.gte=6&vote_count.gte=100`;
+    
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}` 
+      }
+    };
 
-                <div className="serie-card">
-                    <img src={serie2} alt="Sons of Anarchy" />
-                    <h3>Sons of Anarchy</h3>
-                    <p className="serie-rating">⭐⭐⭐⭐⭐ (8.5)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        const randomSeries = data.results
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 4);
+          
+        setSeries(randomSeries);
+      });
+  }, []);
 
-                <div className="serie-card">
-                    <img src={serie3} alt="Suits" />
-                    <h3>Suits</h3>
-                    <p className="serie-rating">⭐⭐⭐⭐☆ (8.4)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+  const adicionarALista = (item) => {
+    const listaAtual = JSON.parse(localStorage.getItem('minhaLista')) || [];
+    const jaExiste = listaAtual.find((elemento) => elemento.id === item.id);
 
-                <div className="serie-card">
-                    <img src={serie4} alt="Lucifer" />
-                    <h3>Lucifer</h3>
-                    <p className="serie-rating">⭐⭐⭐⭐☆ (8.0)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+    if (!jaExiste) {
+      const novaLista = [...listaAtual, item];
+      localStorage.setItem('minhaLista', JSON.stringify(novaLista));
+      alert(`${item.title || item.name} adicionado à lista!`);
+    } else {
+      alert("Este título já está na lista.");
+    }
+  };
+
+  const renderStars = (voteAverage) => {
+    const rating = voteAverage / 2; 
+    const stars = [];
+    
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalf key={i} />);
+      } else {
+        stars.push(<FaRegStar key={i} />);
+      }
+    }
+    return stars;
+  };
+
+  return (
+    <section id="series" className="series">
+      <h2>Séries em destaque</h2>
+
+      <div className="serie-list">
+        {series.map((serie) => (
+          <div key={serie.id} className="serie-card">
+            <img 
+              src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`} 
+              alt={serie.name} 
+            />
+            {/* Para séries na API do TMDB, usamos 'name' em vez de 'title' */}
+            <h3>{serie.name}</h3>
+            
+            <p className="serie-sinopse">
+              {serie.overview}
+            </p>
+
+            <p className="serie-rating">
+              {renderStars(serie.vote_average)} ({serie.vote_average.toFixed(1)})
+            </p>
+             <div className='btns'>
+                <button className="btn-secondary">Ver agora</button>
+                <button className='btn-secondary' onClick={() => adicionarALista(serie)}>Adicionar a lista</button>
             </div>
-        </section>
-    )
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
-export default Series
+export default Series;

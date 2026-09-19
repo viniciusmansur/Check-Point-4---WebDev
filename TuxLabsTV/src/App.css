@@ -58,36 +58,66 @@
 }
 
 .banner {
+  min-height: 440px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  padding: 48px 32px;
-  background: var(--accent-bg);
-  background-image: url(./assets/bb.png);
-  background-position: center;
+  margin: 0 32px 40px;
+  padding: 50px;
+
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.9), rgba(0,0,0,0.1)),
+    url("./assets/bb.png");
+
   background-size: cover;
-  border-radius: 50px;
+  background-position: center;
+  border-radius: 30px;
+}
+
+.banner-text {
+  width: 50%;
+  max-width: 600px;
+}
+
+.banner-tag {
+  color: greenyellow;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .banner-text h1 {
-  margin: 0 0 24px;
-  text-align: left;
-  color: green;
+  color: white;
+  font-size: 52px;
+  margin: 10px 0 20px;
 }
 
 .banner-text p {
-  margin-bottom: 28px;
-  padding-right: 600px;
-  color: rgb(0, 0, 0);
+  color: #ddd;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 25px;
 }
 
-.banner-image {
-  width: 220px;
-  height: auto;
+.btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
-.btn-primary,
+.btn-primary {
+  background: greenyellow;
+  color: black;
+  border: none;
+  border-radius: 25px;
+  padding: 13px 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: white;
+}
 .btn-secondary {
   font: inherit;
   border: none;
@@ -177,6 +207,15 @@
 .serie-card h3 {
   margin: 0 0 8px;
   color: var(--text-h);
+  height: 40px;
+  overflow: hidden;
+}
+
+.serie-sinopse { 
+  font-size: 0.85rem; 
+  margin-bottom: 10px; 
+  height: 60px;
+  overflow: hidden;
 }
 
 .serie-rating {
@@ -202,6 +241,8 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .filmes-card img {
@@ -216,6 +257,15 @@
 .filmes-card h3 {
   margin: 0 0 8px;
   color: var(--text-h);
+  height: 40px;
+  overflow: hidden; 
+}
+
+.filmes-sinopse { 
+  font-size: 0.85rem; 
+  margin-bottom: 10px; 
+  height: 60px;
+  overflow: hidden;
 }
 
 .filmes-rating {
@@ -248,6 +298,15 @@
 .desenhos-card h3 {
   margin: 0 0 8px;
   color: var(--text-h);
+  height: 40px;
+  overflow: hidden;
+}
+
+.desenhos-sinopse { 
+  font-size: 0.85rem; 
+  margin-bottom: 10px; 
+  height: 60px;
+  overflow: hidden;
 }
 
 .desenhos-rating {
@@ -331,4 +390,58 @@
   font-size: 14px;
   border-top: 1px solid var(--border);
   padding-top: 20px;
+}
+
+.lista-card {
+  width: 90%;
+  margin: 25px auto;
+  padding: 25px;
+
+  display: flex;
+  align-items: center;
+  gap: 35px;
+
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 15px;
+}
+
+.lista-capa {
+  width: 190px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.lista-info {
+  flex: 1;
+}
+
+.lista-info h3 {
+  color: greenyellow;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.lista-info p {
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.btn-remover {
+  margin-top: 25px;
+  padding: 10px 20px;
+
+  background: transparent;
+  color: greenyellow;
+
+  border: 1px solid greenyellow;
+  border-radius: 20px;
+
+  cursor: pointer;
+}
+
+.btn-remover:hover {
+  background: greenyellow;
+  color: black;
 }

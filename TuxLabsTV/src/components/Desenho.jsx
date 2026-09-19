@@ -1,44 +1,91 @@
-import { FaStar } from "react-icons/fa";
-import { FaStarHalf } from "react-icons/fa";
-import { FaRegStar } from "react-icons/fa";
+import { useState, useEffect } from 'react';
+import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa";
 
-const Desenhos = ({ desenho1, desenho2, desenho3, desenho4 }) => {
+const Desenhos = () => {
+  const [desenhos, setDesenhos] = useState([]);
 
-    return (
-        <section id="desenhos" className="desenhos">
-            <h2>Desenhos animados em destaque</h2>
+  useEffect(() => {
+    const randomPage = Math.floor(Math.random() * 10) + 1;
+    // O parâmetro with_genres=16 garante que a API retorne apenas Animações
+    const url = `https://api.themoviedb.org/3/discover/movie?with_genres=16&language=pt-BR&page=${randomPage}&vote_average.gte=6&vote_count.gte=100`;
+    
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}` 
+      }
+    };
 
-            <div className="desenhos-list">
-                <div className="desenhos-card">
-                    <img src={desenho1} alt="Gravity Falls" />
-                    <h3>Gravity Falls</h3>
-                    <p className="desenhos-rating"><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /> (8.9)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        const randomDesenhos = data.results
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 4);
+          
+        setDesenhos(randomDesenhos);
+      });
+  }, []);
 
-                <div className="desenhos-card">
-                    <img src={desenho2} alt="Ben 10" />
-                    <h3>Ben 10</h3>
-                    <p className="desenhos-rating"><FaStar /><FaStar /><FaStar /><FaStar /><FaRegStar /> (7.6)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+  const adicionarALista = (item) => {
+    const listaAtual = JSON.parse(localStorage.getItem('minhaLista')) || [];
+    const jaExiste = listaAtual.find((elemento) => elemento.id === item.id);
 
-                <div className="desenhos-card">
-                    <img src={desenho3} alt="Steven Universe" />
-                    <h3>Steven Universe</h3>
-                    <p className="desenhos-rating"><FaStar /><FaStar /><FaStar /><FaStar /><FaRegStar /> (8.1)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+    if (!jaExiste) {
+      const novaLista = [...listaAtual, item];
+      localStorage.setItem('minhaLista', JSON.stringify(novaLista));
+      alert(`${item.title || item.name} adicionado à lista!`);
+    } else {
+      alert("Este título já está na lista.");
+    }
+  };
 
-                <div className="desenhos-card">
-                    <img src={desenho4} alt="Apenas um Show" />
-                    <h3>Apenas um Show</h3>
-                    <p className="desenhos-rating"><FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalf /> (8.6)</p>
-                    <button className="btn-secondary">Ver agora</button>
-                </div>
+  const renderStars = (voteAverage) => {
+    const rating = voteAverage / 2; 
+    const stars = [];
+    
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalf key={i} />);
+      } else {
+        stars.push(<FaRegStar key={i} />);
+      }
+    }
+    return stars;
+  };
+
+  return (
+    <section id="desenhos" className="desenhos">
+      <h2>Desenhos em destaque</h2>
+
+      <div className="desenhos-list">
+        {desenhos.map((desenho) => (
+          <div key={desenho.id} className="desenhos-card">
+            <img 
+              src={`https://image.tmdb.org/t/p/w500${desenho.poster_path}`} 
+              alt={desenho.title} 
+            />
+            <h3>{desenho.title}</h3>
+            
+            <p className="desenhos-sinopse">
+              {desenho.overview}
+            </p>
+
+            <p className="desenhos-rating">
+              {renderStars(desenho.vote_average)} ({desenho.vote_average.toFixed(1)})
+            </p>
+             <div className='btns'>
+                <button className="btn-secondary">Ver agora</button>
+                <button className='btn-secondary' onClick={() => adicionarALista(desenho)}>Adicionar a lista</button>
             </div>
-        </section>
-    )
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
-export default Desenhos
+export default Desenhos;
