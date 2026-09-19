@@ -27,5 +27,8 @@ Rode o servidor de desenvolvimento:
 npm run dev
 Acesse http://localhost:5173.
 
+Ou acesse o site pelo link: https://tuxlabstv.vercel.app/
+
+
 Uso de IA:
 O uso de ia no projeto foi para tirar dúvidas e na criação do localStorage para salvar os filmes na lista.
